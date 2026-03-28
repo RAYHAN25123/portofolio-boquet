@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parcel Buah Premium</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      background: linear-gradient(120deg, #fff0f5, #ffe4ec);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(135deg, #ff7aa2, #ffb6c1);
+      color: white;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      animation: fadeDown 1s ease;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      animation: fadeUp 1s ease;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 80px auto;
+      padding: 20px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: 0.7s ease;
+    }
+
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      text-align: center;
+      color: #ff4f81;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+      gap: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 20px;
+      transition: 0.4s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .gallery img:hover {
+      transform: scale(1.08) rotate(1deg);
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 14px 25px;
+      background: linear-gradient(135deg, #25d366, #1ebe5d);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #fff;
+      margin-top: 60px;
+      box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 15px;
+      animation: zoomIn 0.3s ease;
+    }
+
+    @keyframes fadeDown {
+      from {opacity: 0; transform: translateY(-40px);} 
+      to {opacity: 1; transform: translateY(0);} 
+    }
+
+    @keyframes fadeUp {
+      from {opacity: 0; transform: translateY(40px);} 
+      to {opacity: 1; transform: translateY(0);} 
+    }
+
+    @keyframes zoomIn {
+      from {transform: scale(0.7);} 
+      to {transform: scale(1);} 
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Parcel Buah Premium</h1>
+  <p>Elegan • Fresh • Berkelas</p>
+</header>
+
+<section>
+  <h2>Deskripsi Produk</h2>
+  <div class="card">
+    <p>
+      Parcel buah eksklusif dengan tampilan mewah dan buah segar pilihan.
+      Cocok untuk hadiah ulang tahun, hampers, dan acara spesial.
+    </p>
+  </div>
+</section>
+
+<section>
+  <h2>Galeri Produk</h2>
+  <div class="gallery">
+    <img src="foto1.jpg">
+    <img src="foto2.jpg">
+    <img src="foto3.jpg">
+  </div>
+</section>
+
+<section>
+  <h2>Pesan Sekarang</h2>
+  <div class="card">
+    <p>Hubungi kami sekarang juga 👇</p>
+    <a href="https://wa.me/6281281581986" class="btn" target="_blank">Order WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Parcel Buah Premium</p>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <img id="lightbox-img">
+</div>
+
+<script>
+  const sections = document.querySelectorAll("section");
+
+  window.addEventListener("scroll", () => {
+    sections.forEach(sec => {
+      const pos = sec.getBoundingClientRect().top;
+      if (pos < window.innerHeight - 100) {
+        sec.classList.add("show");
+      }
+    });
+  });
+
+  const images = document.querySelectorAll(".gallery img");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+
+  images.forEach(img => {
+    img.addEventListener("click", () => {
+      lightbox.style.display = "flex";
+      lightboxImg.src = img.src;
+    });
+  });
+
+  lightbox.addEventListener("click", () => {
+    lightbox.style.display = "none";
+  });
+</script>
+
+</body>
+</html>
